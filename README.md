@@ -29,6 +29,7 @@ Demo app for a testing concept of develop and build scalable, stateless Microser
     ```
     docker ps
     ```
+    You should see two successfully running containers: nodejs and rabbitmq.
 ## Running the tests
 
 ### 1. Run npm tests
