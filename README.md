@@ -5,9 +5,9 @@ Demo app for a testing concept of develop and build scalable, stateless Microser
 
 ### Prerequisites
 
-Ubuntu 16.04.5 LTS
-Docker version 18.06.1-ce
-docker-compose version 1.23.2
+- Ubuntu 16.04.5 LTS
+- Docker version 18.06.1-ce
+- docker-compose version 1.23.2
 
 ### Installing
 1. Clone repo
@@ -44,8 +44,8 @@ docker-compose version 1.23.2
 
 - Check Rabbitmq messages which should appear after npm tests
     Rabbitmq avalible on url http://docker-server-ip:15672
-    login: rabbitmq
-    pass: rabbitmq
+    - login: rabbitmq
+    - pass: rabbitmq
 
 ### 2. Run CURL tests
 Goal is:
