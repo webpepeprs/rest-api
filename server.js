@@ -26,7 +26,7 @@ class WebServer {
 		await this.rabbitmq.connect(config.rabbitUrl);
 		await this.rabbitmq.init();
 
-        app.listen(port, () => console.log(`Server listening on port ${port}!`));
+        app.listen(port, () => console.log(`Server listening on port ${port} (${process.env.NODE_ENV})`));
 	}
 
     getIndex(req, res) {
@@ -60,7 +60,7 @@ class WebServer {
 module.exports = WebServer;
 const main = async () => {
 	const webServer = new WebServer();
-	await webServer.start();
+	await webServer.start().catch((e) => console.error(e));
 
 	for (let queue of ['get', 'post']) {
 		await webServer.rabbitmq.chanell
@@ -68,8 +68,8 @@ const main = async () => {
 				let valid = false;
 				config.routes.forEach((route) => valid = route.method == msg.fields.routingKey ? true : valid);
 
-				valid && await webServer[msg.fields.routingKey]({ params: { slug: msg.content.toString() }, body: 'Fake body'}, null, true), { noAck: true }
-			});
+				valid && await webServer[msg.fields.routingKey]({ params: { slug: msg.content.toString() }, body: msg.content.toString() }, null, true), { noAck: true }
+			}).catch((e) => console.error(e));
 	}
 }
 !module.parent && main();
